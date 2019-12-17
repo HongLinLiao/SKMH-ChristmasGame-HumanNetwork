@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Human Network</title>
+
+  <!-- jquery & bootstrap -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+    integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous" />
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+    integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+    integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous">
+  </script>
+
+  <!-- Firebase -->
+  <script src="./firebaseConfig.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.6.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.6.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.6.0/firebase-database.js"></script>
+
+  <!-- css -->
+  <link rel="stylesheet" href="./css/index.css" />
+
+  <!-- js -->
+  <script src="./js/auth.js"></script>
+
+  <script>
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+  </script>
+</head>
+
+<body>
+
+  <!-- header -->
+  <div class="header">
+    <div class="header-title">
+      <p>Human Network</p>
+    </div>
+  </div>
+
+  <!-- sign option -->
+  <div class="signContent">
+    <div class="signOption">
+      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#signInModelCenter">Sign In</button>
+      <br />
+      <br />
+      <br />
+      <button type="button" class="btn btn-info" data-toggle="modal" data-target="#signUpModelCenter">
+        Sign Up
+      </button>
+    </div>
+  </div>
+
+
+  <!-- sign in model -->
+  <div class="modal fade" id="signInModelCenter" tabindex="-1" role="dialog" aria-labelledby="signInModelCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="signInModelCenterTitle">
+            Sign In
+          </h5>
+        </div>
+        <div class="modal-body">
+          <form class="needs-validation-signIn" novalidate>
+            <div class="form-group">
+              <label for="signUpInputEmail">Email address</label>
+              <input type="email" class="form-control" id="signInInputEmail" aria-describedby="emailHelp"
+                placeholder="Enter Email" required />
+              <div class="invalid-feedback">
+                Please Enter a email address.
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="signUpInputPassword">Password</label>
+              <input type="password" class="form-control" id="signInInputPassword" placeholder="Enter Password"
+                required />
+              <div class="invalid-feedback">
+                Please Enter a password.
+              </div>
+            </div>
+            <br />
+            <div style="display: flex; justify-content:space-around;">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                Close
+              </button>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+  <!-- sign up model -->
+  <div class="modal fade" id="signUpModelCenter" tabindex="-1" role="dialog" aria-labelledby="signUpModelCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="signUpModelCenterTitle">
+            Sign Up
+          </h5>
+        </div>
+        <div class="modal-body">
+          <form class="needs-validation-signUp" novalidate>
+            <div class="form-group">
+              <label for="signUpInputName">Name</label>
+              <input type="text" class="form-control" id="signUpInputName" placeholder="Enter Name" required />
+              <div class="invalid-feedback">
+                Please Enter a username.
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="signUpInputEmail">Email address</label>
+              <input type="email" class="form-control" id="signUpInputEmail" aria-describedby="emailHelp"
+                placeholder="Enter Email" required />
+              <div class="invalid-feedback">
+                Please Enter a email address.
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="signUpInputPassword">Password</label>
+              <input type="password" class="form-control" id="signUpInputPassword" placeholder="Enter Password"
+                required />
+              <div class="invalid-feedback">
+                Please Enter a password.
+              </div>
+            </div>
+            <br />
+            <div style="display: flex; justify-content:space-around;">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                Close
+              </button>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        // document.location.href = `main.html?uid=${user.uid}`;
+      }
+    });
+
+    window.addEventListener('load', () => {
+
+      // listen signUp
+      let signUpforms = document.getElementsByClassName('needs-validation-signUp');
+      // Loop over them and prevent submission
+      var validationSignUp = Array.prototype.filter.call(signUpforms, (form) => {
+
+        form.addEventListener('submit', (event) => {
+
+          form.classList.add('was-validated');
+
+          if (form.checkValidity() === false) {
+
+            event.preventDefault();
+            event.stopPropagation();
+
+          } else {
+            let result = signUpUser($('#signUpInputEmail').val(), $('#signUpInputPassword').val(), $('#signUpInputName').val());
+            event.preventDefault();
+            event.stopPropagation();
+          }
+        }, false);
+      });
+
+      // listen signIn
+      let signInforms = document.getElementsByClassName('needs-validation-signIn');
+      // Loop over them and prevent submission
+      var validationSignIn = Array.prototype.filter.call(signInforms, (form) => {
+
+        form.addEventListener('submit', (event) => {
+
+          form.classList.add('was-validated');
+
+          if (form.checkValidity() === false) {
+
+            event.preventDefault();
+            event.stopPropagation();
+
+          } else {
+            let result = signIn($('#signInInputEmail').val(), $('#signInInputPassword').val());
+            event.preventDefault();
+            event.stopPropagation();
+          }
+        }, false);
+      });
+
+
+
+
+
+    }, false);
+  </script>
+
+</body>
+
+</html>
