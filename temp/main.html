@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Human Network</title>
+
+    <!-- jquery & bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous" />
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous">
+    </script>
+
+    <!-- Firebase -->
+    <script src="./firebaseConfig.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.6.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.6.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.6.0/firebase-database.js"></script>
+
+    <!-- css -->
+    <link rel="stylesheet" href="./css/index.css" />
+
+    <!-- js -->
+    <script src="./js/auth.js"></script>
+
+    <script>
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+    </script>
+</head>
+
+<body>
+
+    <!-- header -->
+    <div class="header">
+        <div class="header-title">
+            <p>Human Network</p>
+        </div>
+    </div>
+
+    <!-- option -->
+    <div class="signContent">
+        <div class="signOption">
+            <button type="button" class="btn btn-primary" onclick="goLink()">Link</button>
+            <br />
+            <br />
+            <br />
+            <button type="button" class="btn btn-warning" onclick="goRank()">Rank</button>
+            <br />
+            <br />
+            <br />
+            <button type="button" class="btn btn-secondary" onclick="signOut()">
+                Sign Out
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // current user
+        listenUser();
+
+        let goRank = () => {
+            document.location.href=`rank.html`;
+        }
+
+        let goLink = () => {
+            document.location.href=`link.html`;
+        }
+    </script>
+
+</body>
+
+</html>

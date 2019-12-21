@@ -24,12 +24,14 @@
     <script src="https://www.gstatic.com/firebasejs/7.6.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.6.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.6.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.6.0/firebase-functions.js"></script>
 
     <!-- css -->
     <link rel="stylesheet" href="./css/index.css" />
 
     <!-- js -->
     <script src="./js/auth.js"></script>
+    <script src="./js/link.js"></script>
 
     <script>
         // Initialize Firebase
@@ -46,10 +48,52 @@
         </div>
     </div>
 
+    <div class="rank-area">
+        <span>Rank</span>
+        <br>
+        <div class="list-area">
+            <ul class="list-group rank-list" id="rankList">
+                <!-- <li class="list-group-item"><p class="text-center">weqwdwqdwqdq</p></li>
+                <li class="list-group-item"><p class="text-center">weqwdwqdwqdq</p></li>
+                <li class="list-group-item"><p class="text-center">weqwdwqdwqdq</p></li>
+                <li class="list-group-item"><p class="text-center">weqwdwqdwqdq</p></li>
+                <li class="list-group-item"><p class="text-center">weqwdwqdwqdq</p></li>
+                <li class="list-group-item"><p class="text-center">weqwdwqdwqdq</p></li>
+                <li class="list-group-item"><p class="text-center">weqwdwqdwqdq</p></li>
+                <li class="list-group-item"><p class="text-center">weqwdwqdwqdq</p></li>
+                <li class="list-group-item"><p class="text-center">weqwdwqdwqdq</p></li>
+                <li class="list-group-item"><p class="text-center">weqwdwqdwqdq</p></li> -->
+        </div>
+        
+    </div>
+    
+
+    <!-- absolute bottom -->
+    <div class="bottom-Layout">
+        <div class="bottom-content">
+            <button type="button" class="btn btn-warning" onclick="goLink()">Link</button>
+            <button type="button" class="btn btn-success" onclick="goBack()">Back</button>
+        </div>
+    </div>
+
     <script>
         // current user
         listenUser();
+
+        let goBack = () => {
+            document.location.href = `main.html`;
+        }
+
+        let goLink = () => {
+            document.location.href = `link.html`;
+        }
+
+        // link open or close
+        listenOpen();
+
+        window.onload = repeatGetRank();
     </script>
+
 
 </body>
 

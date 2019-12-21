@@ -49,7 +49,8 @@
   <!-- sign option -->
   <div class="signContent">
     <div class="signOption">
-      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#signInModelCenter">Sign In</button>
+      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#signInModelCenter">Sign
+        In</button>
       <br />
       <br />
       <br />
@@ -101,11 +102,6 @@
     </div>
   </div>
 
-
-
-
-
-
   <!-- sign up model -->
   <div class="modal fade" id="signUpModelCenter" tabindex="-1" role="dialog" aria-labelledby="signUpModelCenterTitle"
     aria-hidden="true">
@@ -155,7 +151,6 @@
   </div>
 
   <script>
-
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         // document.location.href = `main.html?uid=${user.uid}`;
@@ -179,7 +174,8 @@
             event.stopPropagation();
 
           } else {
-            let result = signUpUser($('#signUpInputEmail').val(), $('#signUpInputPassword').val(), $('#signUpInputName').val());
+            let result = signUpUser($('#signUpInputEmail').val(), $('#signUpInputPassword').val(), $(
+              '#signUpInputName').val());
             event.preventDefault();
             event.stopPropagation();
           }
@@ -207,10 +203,6 @@
           }
         }, false);
       });
-
-
-
-
 
     }, false);
   </script>

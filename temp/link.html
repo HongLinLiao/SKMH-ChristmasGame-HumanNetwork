@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Human Network</title>
+
+    <!-- jquery & bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous" />
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous">
+    </script>
+
+    <!-- Firebase -->
+    <script src="./firebaseConfig.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.6.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.6.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.6.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.6.0/firebase-functions.js"></script>
+
+    <!-- css -->
+    <link rel="stylesheet" href="./css/index.css" />
+
+    <!-- js -->
+    <script src="./js/auth.js"></script>
+    <script src="./js/link.js"></script>
+
+    <script>
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+    </script>
+</head>
+
+<body>
+
+    <!-- header -->
+    <div class="header">
+        <div class="header-title">
+            <p>Human Network</p>
+        </div>
+    </div>
+
+    <div class="back-content">
+        <button type="button" class="btn btn-warning" onclick="goRank()">Rank</button>
+        <button type="button" class="btn btn-success" onclick="goBack()">Back</button>
+    </div>
+
+    <!-- Now State -->
+    <div class="open-content">
+        <span>Open State: </span><span id="openState"></span>
+        <br>
+        <span>Your Code: </span><span id="code"></span>
+        <button type="button" id="linkBtn" class="btn btn-primary" data-toggle="modal"
+            data-target="#linkModelCenter">Link</button>
+
+        <br>
+        <br>
+        <span style="font-size: 20px;">First Level: </span><span id="FLCount">0</span>
+        <ul class="list-group" id="FL">
+        </ul>
+    </div>
+
+    <!-- linkModel -->
+    <div class="modal fade" id="linkModelCenter" tabindex="-1" role="dialog" aria-labelledby="linkModelCenterTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="linkModelCenterTitle">
+                        Link
+                    </h5>
+                </div>
+                <div class="modal-body">
+                    <form class="needs-validation-link" novalidate>
+                        <div class="form-group">
+                            <label for="linkInputEmail">Email address</label>
+                            <input type="email" class="form-control" id="linkInputEmail" aria-describedby="emailHelp"
+                                placeholder="Enter Email" required />
+                            <div class="invalid-feedback">
+                                Please Enter a email address.
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="linkInputCode">Code</label>
+                            <input type="text" class="form-control" id="linkInputCode" placeholder="Enter Code"
+                                required />
+                            <div class="invalid-feedback">
+                                Please Enter a code.
+                            </div>
+                        </div>
+                        <br />
+                        <div style="display: flex; justify-content:space-around;">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                Close
+                            </button>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+
+        firstLevel = [];
+
+        // current user
+        listenUser();
+
+        let goBack = () => {
+            document.location.href = `main.html`;
+        }
+
+        let goRank = () => {
+            document.location.href = `rank.html`;
+        }
+
+        // link open or close
+        listenOpen();
+
+        // link
+        window.addEventListener('load', () => {
+
+            // listen link
+            let linkforms = document.getElementsByClassName('needs-validation-link');
+            // Loop over them and prevent submission
+            var validationSignUp = Array.prototype.filter.call(linkforms, (form) => {
+
+                form.addEventListener('submit', (event) => {
+
+                    form.classList.add('was-validated');
+
+                    if (form.checkValidity() === false) {
+
+                        event.preventDefault();
+                        event.stopPropagation();
+
+                    } else {
+                        linkPeople();
+
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                }, false);
+            });
+
+        }, false);
+
+        listenFL();
+
+    </script>
+</body>
+
+</html>
